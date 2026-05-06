@@ -122,7 +122,7 @@ export DEST_VM_START_SCRIPT="/opt/vm-scripts/start-dest-vm.sh"
 export PRE_COPY_SRC_SCRIPT="/opt/migration-scripts/precopy-vm-migrate.sh"
 export POST_COPY_SRC_SCRIPT="/opt/migration-scripts/postcopy-vm-migrate.sh"
 export WORKLOAD_SCRIPT="/opt/workloads/run-workload.sh"
-export MATRIX_SCRIPT="./twolevels.py"           # RT_FSP: Resource Tracker & Future State Predictor
+export MATRIX_SCRIPT="./RT_FSP.py"           # RT_FSP: Resource Tracker & Future State Predictor
 export MIGRATION_STATUS_SCRIPT="./migration-status.sh"
 ```
 
@@ -147,7 +147,7 @@ Migration_Controller.sh:
 
 ### Phase 2: Resource Tracking & Prediction (RT_FSP)
 ```
-twolevels.py (RT_FSP) execution:
+RT_FSP execution:
   
   1. Collect Metrics (Asynchronously):
      ├─ CPU Usage:      mpstat 1 1
