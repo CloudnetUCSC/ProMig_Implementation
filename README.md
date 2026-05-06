@@ -18,60 +18,6 @@ This system uses a **Migration_Controller** to handle the migratiion process and
 5. **Execute migration** using the chosen strategy
 6. **Cleanup** and prepare for next iteration
 
-## System Flow
-
-┌─────────────────────────────────────────────────────────────────┐
-│         PHASE 1: VM STARTUP                                     │
-│  startSource.sh              startDestination.sh                │
-│  (Start Source VM)           (Start Destination VM)             │
-└──────────────┬───────────────────────────────────┬──────────────┘
-               │                                   │
-               └────────────────┬──────────────────┘
-                                │
-┌───────────────────────────────▼──────────────────────────────────┐
-│  PHASE 2: RESOURCE TRACKING & FUTURE STATE PREDICTION            │
-│                                                                  │
-│  ┌──────────────────────────────────────────────────────────┐    │
-│  │ Monitor Real-Time Metrics                                │    │
-│  │ ├─ CPU Usage         ├─ Memory Usage                     │    │
-│  │ └─ Network I/O       └─ Classify: Low/High               │    │
-│  └──────────────────────────────────────────────────────────┘    │
-│                          ↓                                       │
-│  ┌──────────────────────────────────────────────────────────┐    │
-│  │ Update Markov Chain & Predict Future Behavior            │    │
-│  │ ├─ Update state transition probabilities                 │    │
-│  │ ├─ Predict next 15 states                                │    │
-│  │ └─ Analyze trend for optimal strategy                    │    │
-│  └──────────────────────────────────────────────────────────┘    │
-└───────────────────────────────┬──────────────────────────────────┘
-                                │
-               ┌────────────────┴────────────────┐
-               │ RT_FSP Decision Output          │
-               │ (Migration Strategy + Time)     │
-               ↓                                 ↓
-┌────────────────────────┐      ┌──────────────────────────────┐
-│   PRE-COPY             │      │     POST-COPY                │
-│   (Stable workload)    │      │     (High workload)          │
-│   precopy-vm-migrate   │      │     postcopy-vm-migrate      │
-└────────────────────────┘      └──────────────────────────────┘
-               │                                 │
-               └────────────────┬────────────────┘
-                                │
-┌───────────────────────────────▼─────────────────────────────────┐
-│  PHASE 3: MIGRATION EXECUTION                                   │
-│           Migration_Controller executes chosen strategy         │
-│           ├─ Transfer VM memory & state                         │
-│           ├─ Monitor progress                                   │
-│           └─ Complete migration                                 │
-└───────────────────────────────┬─────────────────────────────────┘
-                                │
-┌───────────────────────────────▼─────────────────────────────────┐
-│  PHASE 4: CLEANUP & LOGGING                                     │
-│  ├─ Stop QEMU processes                                         │
-│  ├─ Log performance metrics                                     │
-│  └─ System ready for next iteration                             │
-└─────────────────────────────────────────────────────────────────┘
-
 ## Prerequisites
 
 ### System Requirements
