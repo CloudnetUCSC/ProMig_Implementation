@@ -97,7 +97,7 @@ sudo mkdir -p /opt/migration-scripts
 sudo mkdir -p /opt/workloads
 ```
 
-## Configuration
+## Configuration Details
 
 All scripts use environment variables for configuration. Set them before running:
 
